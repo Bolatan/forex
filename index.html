@@ -93,6 +93,29 @@
             width: 100%;
         }
 
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 48px;
+            /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -112,6 +135,17 @@
             width: 100%;
             height: 100%;
             z-index: 0;
+        }
+
+        .hero-slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
         .slide {
@@ -470,22 +504,47 @@
         }
 
         .payment-form {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            display: none;
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
+            display: none; /* Hide forms by default */
         }
 
-        .payment-form.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
         }
 
         .payment-form h3 {
@@ -702,12 +761,12 @@
 
     <section id="home" class="hero">
         <div class="hero-slider">
-            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/0a0e27/fff?text=Ikeja')"></div>
-            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/1a1f3a/fff?text=Marina')"></div>
-            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/0a0e27/fff?text=Broad+Street')"></div>
-            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/1a1f3a/fff?text=VI')"></div>
-            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/0a0e27/fff?text=Ikoyi')"></div>
-            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x1080/1a1f3a/fff?text=Abuja')"></div>
+            <div class="slide" style="background-image: url('assets/images/ikeja.jpg')"></div>
+            <div class="slide" style="background-image: url('assets/images/marina.jpg')"></div>
+            <div class="slide" style="background-image: url('assets/images/broad_street.jpg')"></div>
+            <div class="slide" style="background-image: url('assets/images/vi.jpg')"></div>
+            <div class="slide" style="background-image: url('assets/images/ikoyi.jpg')"></div>
+            <div class="slide" style="background-image: url('assets/images/abuja.jpg')"></div>
         </div>
         <div class="floating-shapes">
             <div class="shape" style="width: 300px; height: 300px; top: 10%; left: 10%;"></div>
@@ -758,32 +817,32 @@
         <h2 class="section-title">What We Do</h2>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">📈</div>
+                <div class="service-icon"><span class="material-icons">trending_up</span></div>
                 <h3>Forex Trading</h3>
                 <p>Access to major, minor, and exotic currency pairs with competitive spreads and lightning-fast execution.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">🤖</div>
+                <div class="service-icon"><span class="material-icons">smart_toy</span></div>
                 <h3>Automated Trading</h3>
                 <p>Advanced algorithmic trading solutions and expert advisors to maximize your trading efficiency.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">📊</div>
+                <div class="service-icon"><span class="material-icons">analytics</span></div>
                 <h3>Market Analysis</h3>
                 <p>Daily market insights, technical analysis, and economic calendar updates to keep you informed.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">💼</div>
+                <div class="service-icon"><span class="material-icons">business_center</span></div>
                 <h3>Portfolio Management</h3>
                 <p>Professional portfolio management services tailored to your risk tolerance and financial goals.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">🛡️</div>
+                <div class="service-icon"><span class="material-icons">shield</span></div>
                 <h3>Risk Management</h3>
                 <p>Comprehensive risk management tools and strategies to protect your capital and maximize returns.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">👥</div>
+                <div class="service-icon"><span class="material-icons">groups</span></div>
                 <h3>24/7 Support</h3>
                 <p>Round-the-clock customer support from our team of experienced trading professionals.</p>
             </div>
@@ -846,22 +905,22 @@
             
             <div class="payment-methods">
                 <div class="payment-method" data-method="card">
-                    <div class="payment-icon">💳</div>
+                    <div class="payment-icon"><span class="material-icons">credit_card</span></div>
                     <h3>Debit/Credit Card</h3>
                     <p>Verve, Visa, Mastercard</p>
                 </div>
                 <div class="payment-method" data-method="bank">
-                    <div class="payment-icon">🏦</div>
+                    <div class="payment-icon"><span class="material-icons">account_balance</span></div>
                     <h3>Bank Transfer</h3>
                     <p>All Nigerian Banks</p>
                 </div>
                 <div class="payment-method" data-method="ussd">
-                    <div class="payment-icon">📱</div>
+                    <div class="payment-icon"><span class="material-icons">phone_iphone</span></div>
                     <h3>USSD/Mobile</h3>
                     <p>Quick banking code</p>
                 </div>
                 <div class="payment-method" data-method="crypto">
-                    <div class="payment-icon">₿</div>
+                    <div class="payment-icon"><span class="material-icons">currency_bitcoin</span></div>
                     <h3>Cryptocurrency</h3>
                     <p>Bitcoin, USDT</p>
                 </div>
@@ -874,6 +933,14 @@
             </div>
 
             <div class="payment-form-container">
+                <!-- Modal Structure -->
+                <div id="payment-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <div id="modal-body"></div>
+                    </div>
+                </div>
+
                 <!-- Card Payment Form -->
                 <form class="payment-form active" id="card-form">
                     <h3>Card Payment Details</h3>
@@ -907,9 +974,9 @@
                     </div>
                     <button type="submit" class="payment-button">Complete Payment</button>
                     <div class="security-badges">
-                        <span>🔒 SSL Secured</span>
-                        <span>✓ PCI Compliant</span>
-                        <span>🛡️ 256-bit Encryption</span>
+                        <span><span class="material-icons">lock</span> SSL Secured</span>
+                        <span><span class="material-icons">check_circle</span> PCI Compliant</span>
+                        <span><span class="material-icons">verified_user</span> 256-bit Encryption</span>
                     </div>
                 </form>
 
@@ -1025,17 +1092,17 @@
 
             <div class="payment-features">
                 <div class="feature-item">
-                    <div class="feature-icon">🔐</div>
+                    <div class="feature-icon"><span class="material-icons">security</span></div>
                     <h4>Bank-Level Security</h4>
                     <p>Your data is protected with industry-standard encryption</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon">⚡</div>
+                    <div class="feature-icon"><span class="material-icons">flash_on</span></div>
                     <h4>Instant Processing</h4>
                     <p>Get immediate access after successful payment</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon">💯</div>
+                    <div class="feature-icon"><span class="material-icons">sentiment_satisfied_alt</span></div>
                     <h4>Money-Back Guarantee</h4>
                     <p>30-day full refund if you're not satisfied</p>
                 </div>
@@ -1068,22 +1135,22 @@
 
             <div class="contact-info">
                 <div class="contact-item">
-                    <div style="font-size: 2rem;">📧</div>
+                    <div style="font-size: 2rem;"><span class="material-icons">email</span></div>
                     <h4>Email</h4>
                     <p>info@forexproelite.ng</p>
                 </div>
                 <div class="contact-item">
-                    <div style="font-size: 2rem;">📞</div>
+                    <div style="font-size: 2rem;"><span class="material-icons">phone</span></div>
                     <h4>Phone</h4>
                     <p>+234 809 123 4567</p>
                 </div>
                 <div class="contact-item">
-                    <div style="font-size: 2rem;">📍</div>
+                    <div style="font-size: 2rem;"><span class="material-icons">location_on</span></div>
                     <h4>Location</h4>
                     <p>Abuja, Nigeria</p>
                 </div>
                 <div class="contact-item">
-                    <div style="font-size: 2rem;">💬</div>
+                    <div style="font-size: 2rem;"><span class="material-icons">message</span></div>
                     <h4>WhatsApp</h4>
                     <p>+234 809 123 4567</p>
                 </div>
@@ -1330,34 +1397,56 @@
             });
         });
 
-        // Payment method selection
+        // Payment method selection and modal handling
         const paymentMethods = document.querySelectorAll('.payment-method');
-        const paymentForms = document.querySelectorAll('.payment-form');
+        const modal = document.getElementById('payment-modal');
+        const modalBody = document.getElementById('modal-body');
+        const closeButton = document.querySelector('.close-button');
+        let activeForm = null;
+
+        function openModal(selectedMethod) {
+            const formToMove = document.getElementById(`${selectedMethod}-form`);
+            if (formToMove) {
+                activeForm = formToMove;
+                modalBody.appendChild(formToMove);
+                formToMove.style.display = 'block';
+                modal.style.display = 'block';
+
+                gsap.from(modal, { opacity: 0, duration: 0.3 });
+                gsap.from(".modal-content", { y: -50, opacity: 0, duration: 0.4, ease: "power3.out" });
+            }
+        }
+
+        function closeModal() {
+            if (activeForm) {
+                gsap.to(modal, {
+                    opacity: 0,
+                    duration: 0.3,
+                    onComplete: () => {
+                        modal.style.display = 'none';
+                        activeForm.style.display = 'none';
+                        document.querySelector('.payment-form-container').appendChild(activeForm);
+                        activeForm = null;
+                        paymentMethods.forEach(m => m.classList.remove('selected'));
+                    }
+                });
+            }
+        }
 
         paymentMethods.forEach(method => {
             method.addEventListener('click', function() {
                 const selectedMethod = this.getAttribute('data-method');
-                
-                // Remove active class from all methods and forms
                 paymentMethods.forEach(m => m.classList.remove('selected'));
-                paymentForms.forEach(f => f.classList.remove('active'));
-                
-                // Add selected class to clicked method
                 this.classList.add('selected');
-                
-                // Show corresponding form with animation
-                const targetForm = document.getElementById(`${selectedMethod}-form`);
-                gsap.to(targetForm, {
-                    display: 'block',
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.5,
-                    ease: "power3.out",
-                    onStart: () => {
-                        targetForm.classList.add('active');
-                    }
-                });
+                openModal(selectedMethod);
             });
+        });
+
+        closeButton.addEventListener('click', closeModal);
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
         });
 
         // Card number formatting
