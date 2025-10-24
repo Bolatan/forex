@@ -54,6 +54,25 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
@@ -780,8 +799,11 @@
 </head>
 <body>
     <nav>
-        <div class="logo">ForexPro Elite</div>
-        <ul class="nav-links" id="nav-links">
+        <div class="logo-container">
+            <div class="logo-icon">FE</div>
+            <div class="logo">ForexPro Elite</div>
+        </div>
+        <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
