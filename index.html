@@ -7,6 +7,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
     <style>
         :root {
             --primary-color: #007bff;
@@ -417,7 +419,7 @@
 
         .payment-methods {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1.5rem;
             margin-bottom: 3rem;
         }
@@ -614,6 +616,43 @@
         .feature-item p {
             color: var(--text-color);
             font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         /* Footer */
@@ -826,6 +865,12 @@
                     <h3>Cryptocurrency</h3>
                     <p>Bitcoin, USDT</p>
                 </div>
+                <div class="payment-method" data-method="paystack">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Paystack_Logo.png/1200px-Paystack_Logo.png" alt="Paystack" style="width: 100px; height: auto;">
+                </div>
+                <div class="payment-method" data-method="flutterwave">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Flutterwave_Logo.png" alt="Flutterwave" style="width: 100px; height: auto;">
+                </div>
             </div>
 
             <div class="payment-form-container">
@@ -969,6 +1014,13 @@
                 </form>
 
                 <!-- PayPal Form removed - replaced with USSD above -->
+                <!-- Paystack and Flutterwave Buttons -->
+                <div class="payment-method" data-method="paystack">
+                    <button id="pay-with-paystack" class="payment-button">Pay with Paystack</button>
+                </div>
+                <div class="payment-method" data-method="flutterwave">
+                    <button id="pay-with-flutterwave" class="payment-button">Pay with Flutterwave</button>
+                </div>
             </div>
 
             <div class="payment-features">
@@ -1042,6 +1094,52 @@
     <footer>
         <p>&copy; 2025 ForexPro Elite. All rights reserved. Trading forex involves risk. Past performance does not guarantee future results.</p>
     </footer>
+
+    <!-- Paystack Modal -->
+    <div id="paystack-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Pay with Paystack</h2>
+            <div id="paystack-form">
+                <div class="form-group">
+                    <label for="paystack-email">Email</label>
+                    <input type="email" id="paystack-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="paystack-amount">Amount (NGN)</label>
+                    <input type="number" id="paystack-amount" required>
+                </div>
+                <button id="paystack-submit" class="payment-button">Pay Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flutterwave Modal -->
+    <div id="flutterwave-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Pay with Flutterwave</h2>
+            <div id="flutterwave-form">
+                <div class="form-group">
+                    <label for="flutterwave-email">Email</label>
+                    <input type="email" id="flutterwave-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="flutterwave-amount">Amount (NGN)</label>
+                    <input type="number" id="flutterwave-amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="flutterwave-name">Full Name</label>
+                    <input type="text" id="flutterwave-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="flutterwave-phone">Phone Number</label>
+                    <input type="tel" id="flutterwave-phone" required>
+                </div>
+                <button id="flutterwave-submit" class="payment-button">Pay Now</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -1361,6 +1459,98 @@
 
         showSlide(currentSlide);
         setInterval(nextSlide, 5000);
+
+        // Modal logic
+        const paystackModal = document.getElementById('paystack-modal');
+        const flutterwaveModal = document.getElementById('flutterwave-modal');
+        const paystackBtn = document.getElementById('pay-with-paystack');
+        const flutterwaveBtn = document.getElementById('pay-with-flutterwave');
+        const closeBtns = document.querySelectorAll('.close');
+
+        paystackBtn.onclick = function() {
+            paystackModal.style.display = "block";
+        }
+
+        flutterwaveBtn.onclick = function() {
+            flutterwaveModal.style.display = "block";
+        }
+
+        closeBtns.forEach(btn => {
+            btn.onclick = function() {
+                paystackModal.style.display = "none";
+                flutterwaveModal.style.display = "none";
+            }
+        });
+
+        window.onclick = function(event) {
+            if (event.target == paystackModal || event.target == flutterwaveModal) {
+                paystackModal.style.display = "none";
+                flutterwaveModal.style.display = "none";
+            }
+        }
+
+        // Paystack Payment Logic
+        const paystackSubmit = document.getElementById('paystack-submit');
+        paystackSubmit.addEventListener('click', () => {
+            const email = document.getElementById('paystack-email').value;
+            const amount = document.getElementById('paystack-amount').value * 100; // Amount in kobo
+
+            const handler = PaystackPop.setup({
+                // IMPORTANT: Replace with your actual Paystack public key
+                key: 'YOUR_PAYSTACK_PUBLIC_KEY',
+                email: email,
+                amount: amount,
+                currency: 'NGN',
+                ref: 'ps_' + Math.floor((Math.random() * 1000000000) + 1),
+                callback: function(response) {
+                    alert('Payment successful. Transaction reference: ' + response.reference);
+                    paystackModal.style.display = "none";
+                },
+                onClose: function() {
+                    alert('Payment window closed.');
+                }
+            });
+            handler.openIframe();
+        });
+
+        // Flutterwave Payment Logic
+        const flutterwaveSubmit = document.getElementById('flutterwave-submit');
+        flutterwaveSubmit.addEventListener('click', () => {
+            const email = document.getElementById('flutterwave-email').value;
+            const amount = document.getElementById('flutterwave-amount').value;
+            const name = document.getElementById('flutterwave-name').value;
+            const phone = document.getElementById('flutterwave-phone').value;
+
+            FlutterwaveCheckout({
+                // IMPORTANT: Replace with your actual Flutterwave public key
+                public_key: 'YOUR_FLUTTERWAVE_PUBLIC_KEY',
+                tx_ref: 'fw_' + Math.floor((Math.random() * 1000000000) + 1),
+                amount: amount,
+                currency: 'NGN',
+                payment_options: "card, banktransfer, ussd",
+                customer: {
+                    email: email,
+                    name: name,
+                    phone_number: phone
+                },
+                customizations: {
+                    title: "ForexPro Elite",
+                    description: "Payment for Forex Trading Course",
+                    logo: "https://www.forexproelite.com/logo.png"
+                },
+                callback: function(response) {
+                    if (response.status == "successful") {
+                        alert('Payment successful. Transaction ID: ' + response.transaction_id);
+                        flutterwaveModal.style.display = "none";
+                    } else {
+                        alert('Payment failed.');
+                    }
+                },
+                onclose: function() {
+                    console.log("Payment window closed.");
+                }
+            });
+        });
     </script>
 </body>
 </html>
