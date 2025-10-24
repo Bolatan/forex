@@ -1315,8 +1315,8 @@
                 formToMove.style.display = 'block';
                 modal.style.display = 'block';
 
-                gsap.from(modal, { opacity: 0, duration: 0.3 });
-                gsap.from(".modal-content", { y: -50, opacity: 0, duration: 0.4, ease: "power3.out" });
+                gsap.from(modal, { opacity: 0, duration: 0.3, overwrite: 'auto' });
+                gsap.from(".modal-content", { y: -50, opacity: 0, duration: 0.4, ease: "power3.out", overwrite: 'auto' });
             }
         }
 
@@ -1325,6 +1325,7 @@
                 gsap.to(modal, {
                     opacity: 0,
                     duration: 0.3,
+                    overwrite: 'auto',
                     onComplete: () => {
                         modal.style.display = 'none';
                         activeForm.style.display = 'none';
