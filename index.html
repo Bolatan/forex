@@ -112,6 +112,72 @@
             width: 100%;
         }
 
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger-menu .material-icons {
+            font-size: 2.5rem;
+            color: var(--heading-color);
+        }
+
+        .mobile-nav-container {
+            position: fixed;
+            top: 0;
+            left: -100%; /* Start off-screen */
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .mobile-nav-container.active {
+            left: 0;
+        }
+
+        .mobile-nav-container .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-nav-container .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .mobile-nav-container .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .close-menu .material-icons {
+            font-size: 3rem;
+            color: #fff;
+        }
+
         .material-icons {
             font-family: 'Material Icons';
             font-weight: normal;
@@ -722,7 +788,11 @@
             }
 
             .nav-links {
-                display: none; /* Add mobile menu logic */
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: block;
             }
         }
     </style>
@@ -741,7 +811,11 @@
             <li><a href="#payment">Payment</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <button class="hamburger-menu" id="hamburger-menu">
+            <span class="material-icons">menu</span>
+        </button>
     </nav>
+    <div class="mobile-nav-container" id="mobile-nav-container"></div>
 
     <section id="home" class="hero">
         <div class="hero-slider">
@@ -1473,6 +1547,34 @@
 
         showSlide(currentSlide);
         setInterval(nextSlide, 5000);
+
+
+        // Mobile menu
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const mobileNavContainer = document.getElementById('mobile-nav-container');
+        const navLinks = document.getElementById('nav-links');
+
+        // Clone nav links to mobile container and add close button
+        const mobileNavLinks = navLinks.cloneNode(true);
+        mobileNavContainer.appendChild(mobileNavLinks);
+
+        const closeMenuButton = document.createElement('button');
+        closeMenuButton.classList.add('close-menu');
+        closeMenuButton.innerHTML = '<span class="material-icons">close</span>';
+        mobileNavContainer.prepend(closeMenuButton);
+
+        hamburgerMenu.addEventListener('click', () => {
+            mobileNavContainer.classList.add('active');
+        });
+
+        closeMenuButton.addEventListener('click', () => {
+            mobileNavContainer.classList.remove('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileNavLinks.addEventListener('click', () => {
+            mobileNavContainer.classList.remove('active');
+        });
     </script>
 </body>
 </html>
