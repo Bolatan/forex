@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForexPro Elite - Professional Forex Trading</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #0a0e27;
+            color: #fff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 5%;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #b8c5d6;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            line-height: 1.8;
+            color: #b8c5d6;
+        }
+
+        .about-text h3 {
+            color: #fff;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #b8c5d6;
+            margin-top: 0.5rem;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: #b8c5d6;
+            line-height: 1.6;
+        }
+
+        /* Training Section */
+        .training-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .training-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .training-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .training-card ul {
+            list-style: none;
+            color: #b8c5d6;
+        }
+
+        .training-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .training-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .training-price {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1.5rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: #b8c5d6;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-item h4 {
+            margin: 1rem 0 0.5rem;
+            color: #fff;
+        }
+
+        .contact-item p {
+            color: #b8c5d6;
+        }
+
+        /* Payment Section */
+        .payment-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .payment-method {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .payment-method.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-method h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .payment-method p {
+            color: #b8c5d6;
+            font-size: 0.9rem;
+        }
+
+        .payment-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 500px;
+        }
+
+        .payment-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .payment-form.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            position: relative;
+        }
+
+        .payment-form h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row:has(.form-group:nth-child(2)) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .payment-form select {
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .payment-form select option {
+            background: #1a1f3a;
+            color: #fff;
+        }
+
+        .payment-button {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .payment-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .security-badges span {
+            color: #b8c5d6;
+            font-size: 0.9rem;
+        }
+
+        .crypto-address {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .crypto-address p {
+            color: #b8c5d6;
+            margin-bottom: 1rem;
+        }
+
+        .address-box {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .address-box code {
+            flex: 1;
+            color: #667eea;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border: 1px solid #667eea;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #667eea;
+            color: #fff;
+        }
+
+        .qr-placeholder {
+            width: 150px;
+            height: 150px;
+            margin: 1rem auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .bank-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .bank-info {
+            padding: 0.8rem 0;
+            color: #b8c5d6;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bank-info:last-child {
+            border-bottom: none;
+        }
+
+        .bank-info strong {
+            color: #fff;
+            margin-right: 0.5rem;
+        }
+
+        .paypal-info {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .paypal-info p {
+            color: #b8c5d6;
+        }
+
+        .ussd-info {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .ussd-info p {
+            color: #b8c5d6;
+        }
+
+        .ussd-info strong {
+            color: #fff;
+        }
+
+        .payment-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h4 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: #b8c5d6;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 14, 39, 0.95);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b8c5d6;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">ForexPro Elite</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#training">Training</a></li>
+            <li><a href="#payment">Payment</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="floating-shapes">
+            <div class="shape" style="width: 300px; height: 300px; top: 10%; left: 10%;"></div>
+            <div class="shape" style="width: 200px; height: 200px; top: 60%; right: 15%;"></div>
+            <div class="shape" style="width: 150px; height: 150px; bottom: 10%; left: 50%;"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Master Forex Trading</h1>
+            <p>Your Gateway to Financial Freedom Through Professional Trading</p>
+            <button class="cta-button">Start Your Journey</button>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About ForexPro Elite</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>ForexPro Elite is Nigeria's premier forex trading company based in Abuja, dedicated to empowering Nigerian traders with world-class knowledge, tools, and support needed to succeed in the global foreign exchange market.</p>
+                
+                <h3>Our Mission</h3>
+                <p>We strive to democratize forex trading in Nigeria by providing internationally recognized education, cutting-edge technology, and personalized support to traders at every level, while ensuring compliance with Nigerian financial regulations.</p>
+                
+                <h3>Why Choose Us</h3>
+                <p>As a proudly Nigerian company, we understand the local market dynamics and challenges. Our team of expert traders and educators have helped thousands of Nigerian clients achieve their financial goals through strategic trading, comprehensive training programs, and local payment solutions.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Active Traders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$2B+</div>
+                    <div class="stat-label">Trading Volume</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">What We Do</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>Forex Trading</h3>
+                <p>Access to major, minor, and exotic currency pairs with competitive spreads and lightning-fast execution.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>Automated Trading</h3>
+                <p>Advanced algorithmic trading solutions and expert advisors to maximize your trading efficiency.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Market Analysis</h3>
+                <p>Daily market insights, technical analysis, and economic calendar updates to keep you informed.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>Portfolio Management</h3>
+                <p>Professional portfolio management services tailored to your risk tolerance and financial goals.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>Risk Management</h3>
+                <p>Comprehensive risk management tools and strategies to protect your capital and maximize returns.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock customer support from our team of experienced trading professionals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="training">
+        <h2 class="section-title">Trading Training Programs</h2>
+        <div class="training-content">
+            <p style="text-align: center; color: #b8c5d6; max-width: 800px; margin: 0 auto;">
+                Whether you're a complete beginner or an experienced trader looking to refine your skills, our comprehensive training programs are designed to help you succeed in the forex market.
+            </p>
+            <div class="training-grid">
+                <div class="training-card">
+                    <h4>Beginner Course</h4>
+                    <div class="training-price">₦150,000</div>
+                    <ul>
+                        <li>Forex fundamentals</li>
+                        <li>Trading platform basics</li>
+                        <li>Risk management principles</li>
+                        <li>Chart reading skills</li>
+                        <li>Demo account practice</li>
+                        <li>Certificate of completion</li>
+                    </ul>
+                </div>
+                <div class="training-card">
+                    <h4>Intermediate Course</h4>
+                    <div class="training-price">₦300,000</div>
+                    <ul>
+                        <li>Technical analysis mastery</li>
+                        <li>Trading strategies</li>
+                        <li>Market psychology</li>
+                        <li>Advanced indicators</li>
+                        <li>Live trading sessions</li>
+                        <li>1-on-1 mentorship (2 hours)</li>
+                    </ul>
+                </div>
+                <div class="training-card">
+                    <h4>Advanced Course</h4>
+                    <div class="training-price">₦500,000</div>
+                    <ul>
+                        <li>Professional trading strategies</li>
+                        <li>Algorithmic trading</li>
+                        <li>Portfolio optimization</li>
+                        <li>Institutional trading techniques</li>
+                        <li>Private mentorship (5 hours)</li>
+                        <li>Lifetime community access</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="payment">
+        <h2 class="section-title">Secure Payment</h2>
+        <div class="payment-content">
+            <p style="text-align: center; color: #b8c5d6; max-width: 800px; margin: 0 auto 3rem;">
+                Choose your preferred payment method. All transactions are encrypted and secure.
+            </p>
+            
+            <div class="payment-methods">
+                <div class="payment-method" data-method="card">
+                    <div class="payment-icon">💳</div>
+                    <h3>Debit/Credit Card</h3>
+                    <p>Verve, Visa, Mastercard</p>
+                </div>
+                <div class="payment-method" data-method="bank">
+                    <div class="payment-icon">🏦</div>
+                    <h3>Bank Transfer</h3>
+                    <p>All Nigerian Banks</p>
+                </div>
+                <div class="payment-method" data-method="ussd">
+                    <div class="payment-icon">📱</div>
+                    <h3>USSD/Mobile</h3>
+                    <p>Quick banking code</p>
+                </div>
+                <div class="payment-method" data-method="crypto">
+                    <div class="payment-icon">₿</div>
+                    <h3>Cryptocurrency</h3>
+                    <p>Bitcoin, USDT</p>
+                </div>
+            </div>
+
+            <div class="payment-form-container">
+                <!-- Card Payment Form -->
+                <form class="payment-form active" id="card-form">
+                    <h3>Card Payment Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-name">Cardholder Name</label>
+                            <input type="text" id="card-name" placeholder="John Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-expiry">Expiry Date</label>
+                            <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-cvv">CVV</label>
+                            <input type="text" id="card-cvv" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-amount">Amount (₦)</label>
+                            <input type="number" id="card-amount" placeholder="150,000" min="1" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="payment-button">Complete Payment</button>
+                    <div class="security-badges">
+                        <span>🔒 SSL Secured</span>
+                        <span>✓ PCI Compliant</span>
+                        <span>🛡️ 256-bit Encryption</span>
+                    </div>
+                </form>
+
+                <!-- Bank Transfer Form -->
+                <form class="payment-form" id="bank-form">
+                    <h3>Bank Transfer Details</h3>
+                    <div class="bank-details">
+                        <div class="bank-info">
+                            <strong>Bank Name:</strong> Access Bank Nigeria
+                        </div>
+                        <div class="bank-info">
+                            <strong>Account Name:</strong> ForexPro Elite Limited
+                        </div>
+                        <div class="bank-info">
+                            <strong>Account Number:</strong> 0123456789
+                        </div>
+                        <div class="bank-info">
+                            <strong>Account Type:</strong> Corporate Current Account
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bank-amount">Amount (₦)</label>
+                            <input type="number" id="bank-amount" placeholder="150,000" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bank-ref">Your Name/Email (for confirmation)</label>
+                            <input type="text" id="bank-ref" placeholder="John Doe / your@email.com" required>
+                        </div>
+                    </div>
+                    <p style="color: #b8c5d6; font-size: 0.9rem; text-align: center; margin-top: 1rem;">
+                        After making the transfer, please send your payment proof to info@forexproelite.ng
+                    </p>
+                    <button type="submit" class="payment-button">Submit Transfer Details</button>
+                </form>
+
+                <!-- USSD Payment Form -->
+                <form class="payment-form" id="ussd-form">
+                    <h3>USSD Mobile Payment</h3>
+                    <div class="ussd-info">
+                        <p><strong>Quick Banking with USSD Code</strong></p>
+                        <p style="margin-top: 1rem;">Dial the code for your bank:</p>
+                    </div>
+                    <div class="bank-details" style="max-height: 300px; overflow-y: auto;">
+                        <div class="bank-info"><strong>GTBank:</strong> *737*Amount*Account#</div>
+                        <div class="bank-info"><strong>Access Bank:</strong> *901*Amount*Account#</div>
+                        <div class="bank-info"><strong>Zenith Bank:</strong> *966*Amount*Account#</div>
+                        <div class="bank-info"><strong>UBA:</strong> *919*Amount*Account#</div>
+                        <div class="bank-info"><strong>First Bank:</strong> *894*Amount*Account#</div>
+                        <div class="bank-info"><strong>Stanbic IBTC:</strong> *909*Amount*Account#</div>
+                        <div class="bank-info"><strong>Sterling Bank:</strong> *822*Amount*Account#</div>
+                    </div>
+                    <div class="form-row" style="margin-top: 1.5rem;">
+                        <div class="form-group">
+                            <label for="ussd-amount">Amount (₦)</label>
+                            <input type="number" id="ussd-amount" placeholder="150,000" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ussd-phone">Your Phone Number</label>
+                            <input type="tel" id="ussd-phone" placeholder="08012345678" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="payment-button">Confirm USSD Payment</button>
+                </form>
+
+                <!-- Crypto Payment Form -->
+                <form class="payment-form" id="crypto-form">
+                    <h3>Cryptocurrency Payment</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="crypto-type">Select Cryptocurrency</label>
+                            <select id="crypto-type" required>
+                                <option value="">Choose...</option>
+                                <option value="btc">Bitcoin (BTC)</option>
+                                <option value="eth">Ethereum (ETH)</option>
+                                <option value="usdt">Tether (USDT)</option>
+                                <option value="usdc">USD Coin (USDC)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="crypto-amount">Amount (₦)</label>
+                            <input type="number" id="crypto-amount" placeholder="150,000" min="1" required>
+                        </div>
+                    </div>
+                    <div class="crypto-address">
+                        <p>Send payment to this address:</p>
+                        <div class="address-box">
+                            <code id="wallet-address">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</code>
+                            <button type="button" class="copy-btn" onclick="copyAddress()">Copy</button>
+                        </div>
+                        <div class="qr-code">
+                            <div class="qr-placeholder">📱 QR Code</div>
+                        </div>
+                    </div>
+                    <button type="submit" class="payment-button">Confirm Payment</button>
+                </form>
+
+                <!-- PayPal Form removed - replaced with USSD above -->
+            </div>
+
+            <div class="payment-features">
+                <div class="feature-item">
+                    <div class="feature-icon">🔐</div>
+                    <h4>Bank-Level Security</h4>
+                    <p>Your data is protected with industry-standard encryption</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Instant Processing</h4>
+                    <p>Get immediate access after successful payment</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💯</div>
+                    <h4>Money-Back Guarantee</h4>
+                    <p>30-day full refund if you're not satisfied</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div style="font-size: 2rem;">📧</div>
+                    <h4>Email</h4>
+                    <p>info@forexproelite.ng</p>
+                </div>
+                <div class="contact-item">
+                    <div style="font-size: 2rem;">📞</div>
+                    <h4>Phone</h4>
+                    <p>+234 809 123 4567</p>
+                </div>
+                <div class="contact-item">
+                    <div style="font-size: 2rem;">📍</div>
+                    <h4>Location</h4>
+                    <p>Abuja, Nigeria</p>
+                </div>
+                <div class="contact-item">
+                    <div style="font-size: 2rem;">💬</div>
+                    <h4>WhatsApp</h4>
+                    <p>+234 809 123 4567</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 ForexPro Elite. All rights reserved. Trading forex involves risk. Past performance does not guarantee future results.</p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar animation
+        gsap.from("nav", {
+            y: -100,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Hero animations
+        gsap.from(".hero-content h1", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            delay: 0.3,
+            ease: "power3.out"
+        });
+
+        gsap.from(".hero-content p", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.5,
+            ease: "power3.out"
+        });
+
+        gsap.from(".hero-content button", {
+            scale: 0,
+            opacity: 0,
+            duration: 0.8,
+            delay: 0.8,
+            ease: "back.out(1.7)"
+        });
+
+        // Floating shapes animation
+        gsap.to(".shape", {
+            y: "random(-50, 50)",
+            x: "random(-50, 50)",
+            duration: "random(3, 5)",
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            stagger: {
+                amount: 1,
+                from: "random"
+            }
+        });
+
+        // Section title animations
+        gsap.utils.toArray(".section-title").forEach(title => {
+            gsap.from(title, {
+                scrollTrigger: {
+                    trigger: title,
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Stats animation
+        gsap.utils.toArray(".stat-card").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: "power3.out"
+            });
+
+            // Animate numbers
+            const number = card.querySelector(".stat-number");
+            const finalValue = number.textContent;
+            gsap.from(number, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%"
+                },
+                textContent: 0,
+                duration: 2,
+                ease: "power1.out",
+                snap: { textContent: 1 },
+                onUpdate: function() {
+                    number.textContent = Math.ceil(this.targets()[0].textContent) + finalValue.replace(/[0-9]/g, '');
+                }
+            });
+        });
+
+        // Service cards animation
+        gsap.utils.toArray(".service-card").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%"
+                },
+                y: 60,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: "power3.out"
+            });
+        });
+
+        // Training cards animation
+        gsap.utils.toArray(".training-card").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%"
+                },
+                scale: 0.8,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.15,
+                ease: "back.out(1.7)"
+            });
+        });
+
+        // Contact form animation
+        gsap.from(".contact-form", {
+            scrollTrigger: {
+                trigger: ".contact-form",
+                start: "top 80%"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        gsap.utils.toArray(".contact-item").forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%"
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: "power3.out"
+            });
+        });
+
+        // About text animation
+        gsap.from(".about-text", {
+            scrollTrigger: {
+                trigger: ".about-text",
+                start: "top 80%"
+            },
+            x: -50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: {
+                            y: target,
+                            offsetY: 80
+                        },
+                        ease: "power3.inOut"
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // CTA button animation
+        document.querySelector('.hero .cta-button').addEventListener('click', function() {
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: {
+                    y: "#training",
+                    offsetY: 80
+                },
+                ease: "power3.inOut"
+            });
+        });
+
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const paymentForms = document.querySelectorAll('.payment-form');
+
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', function() {
+                const selectedMethod = this.getAttribute('data-method');
+                
+                // Remove active class from all methods and forms
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                paymentForms.forEach(f => f.classList.remove('active'));
+                
+                // Add selected class to clicked method
+                this.classList.add('selected');
+                
+                // Show corresponding form with animation
+                const targetForm = document.getElementById(`${selectedMethod}-form`);
+                gsap.to(targetForm, {
+                    display: 'block',
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "power3.out",
+                    onStart: () => {
+                        targetForm.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Card number formatting
+        document.getElementById('card-number')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting
+        document.getElementById('card-expiry')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Copy wallet address
+        function copyAddress() {
+            const address = document.getElementById('wallet-address').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+
+        // Payment form submissions
+        document.querySelectorAll('.payment-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                const button = this.querySelector('.payment-button');
+                const originalText = button.textContent;
+                button.textContent = 'Processing...';
+                button.disabled = true;
+                
+                // Simulate payment processing
+                setTimeout(() => {
+                    alert('Payment processed successfully! You will receive a confirmation email shortly.');
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    this.reset();
+                }, 2000);
+            });
+        });
+
+        // Animate payment methods
+        gsap.utils.toArray('.payment-method').forEach((method, i) => {
+            gsap.from(method, {
+                scrollTrigger: {
+                    trigger: method,
+                    start: "top 85%"
+                },
+                scale: 0.8,
+                opacity: 0,
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: "back.out(1.7)"
+            });
+        });
+
+        // Animate payment features
+        gsap.utils.toArray('.feature-item').forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.15,
+                ease: "power3.out"
+            });
+        });
+    </script>
+</body>
+</html>
