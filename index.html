@@ -504,22 +504,47 @@
         }
 
         .payment-form {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            display: none;
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
+            display: none; /* Hide forms by default */
         }
 
-        .payment-form.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
         }
 
         .payment-form h3 {
@@ -865,6 +890,14 @@
             </div>
 
             <div class="payment-form-container">
+                <!-- Modal Structure -->
+                <div id="payment-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <div id="modal-body"></div>
+                    </div>
+                </div>
+
                 <!-- Card Payment Form -->
                 <form class="payment-form active" id="card-form">
                     <h3>Card Payment Details</h3>
@@ -1268,34 +1301,56 @@
             });
         });
 
-        // Payment method selection
+        // Payment method selection and modal handling
         const paymentMethods = document.querySelectorAll('.payment-method');
-        const paymentForms = document.querySelectorAll('.payment-form');
+        const modal = document.getElementById('payment-modal');
+        const modalBody = document.getElementById('modal-body');
+        const closeButton = document.querySelector('.close-button');
+        let activeForm = null;
+
+        function openModal(selectedMethod) {
+            const formToMove = document.getElementById(`${selectedMethod}-form`);
+            if (formToMove) {
+                activeForm = formToMove;
+                modalBody.appendChild(formToMove);
+                formToMove.style.display = 'block';
+                modal.style.display = 'block';
+
+                gsap.from(modal, { opacity: 0, duration: 0.3 });
+                gsap.from(".modal-content", { y: -50, opacity: 0, duration: 0.4, ease: "power3.out" });
+            }
+        }
+
+        function closeModal() {
+            if (activeForm) {
+                gsap.to(modal, {
+                    opacity: 0,
+                    duration: 0.3,
+                    onComplete: () => {
+                        modal.style.display = 'none';
+                        activeForm.style.display = 'none';
+                        document.querySelector('.payment-form-container').appendChild(activeForm);
+                        activeForm = null;
+                        paymentMethods.forEach(m => m.classList.remove('selected'));
+                    }
+                });
+            }
+        }
 
         paymentMethods.forEach(method => {
             method.addEventListener('click', function() {
                 const selectedMethod = this.getAttribute('data-method');
-                
-                // Remove active class from all methods and forms
                 paymentMethods.forEach(m => m.classList.remove('selected'));
-                paymentForms.forEach(f => f.classList.remove('active'));
-                
-                // Add selected class to clicked method
                 this.classList.add('selected');
-                
-                // Show corresponding form with animation
-                const targetForm = document.getElementById(`${selectedMethod}-form`);
-                gsap.to(targetForm, {
-                    display: 'block',
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.5,
-                    ease: "power3.out",
-                    onStart: () => {
-                        targetForm.classList.add('active');
-                    }
-                });
+                openModal(selectedMethod);
             });
+        });
+
+        closeButton.addEventListener('click', closeModal);
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
         });
 
         // Card number formatting
