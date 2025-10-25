@@ -9,6 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #007bff;
@@ -27,7 +30,7 @@
         }
 
         body {
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             background: var(--background-color);
             color: var(--text-color);
@@ -237,6 +240,7 @@
         }
 
         .hero h1 {
+            font-family: 'Poppins', sans-serif;
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
             color: #ffffff;
@@ -285,6 +289,38 @@
             background: rgba(0, 123, 255, 0.05);
         }
 
+        .slider-arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .arrow {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .arrow:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .left-arrow {
+            margin-left: 2rem;
+        }
+
+        .right-arrow {
+            margin-right: 2rem;
+        }
+
         /* Section Styles */
         section {
             padding: 6rem 5%;
@@ -296,6 +332,7 @@
         }
 
         .section-title {
+            font-family: 'Poppins', sans-serif;
             font-size: 2.8rem;
             text-align: center;
             margin-bottom: 4rem;
@@ -324,10 +361,12 @@
             font-size: 1.5rem;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+        .about-image {
+            background-image: url('https://source.unsplash.com/random/?forex');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            min-height: 300px;
         }
 
         .stat-card {
@@ -348,6 +387,16 @@
         .stat-label {
             color: var(--text-color);
             margin-top: 0.5rem;
+        }
+
+        #forex-image-section {
+            background-image: url('https://source.unsplash.com/random/?forex,trading');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            padding: 0;
         }
 
         /* Services Section */
@@ -904,6 +953,10 @@
             <p>Your Gateway to Financial Freedom Through Professional Trading</p>
             <button class="cta-button">Start Your Journey</button>
         </div>
+        <div class="slider-arrows">
+            <button class="arrow left-arrow">&lt;</button>
+            <button class="arrow right-arrow">&gt;</button>
+        </div>
     </section>
 
     <section id="about">
@@ -918,53 +971,40 @@
                 <h3>Why Choose Us</h3>
                 <p>As a proudly Nigerian company, we understand the local market dynamics and challenges. Our team of expert traders and educators have helped thousands of Nigerian clients achieve their financial goals through strategic trading, comprehensive training programs, and local payment solutions.</p>
             </div>
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">5000+</div>
-                    <div class="stat-label">Active Traders</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">$2B+</div>
-                    <div class="stat-label">Trading Volume</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Success Rate</div>
-                </div>
+            <div class="about-image">
             </div>
         </div>
+    </section>
+
+    <section id="forex-image-section">
     </section>
 
     <section id="ebooks">
         <h2 class="section-title">Our Ebooks</h2>
         <div class="ebook-grid">
             <div class="ebook-card">
-                <img src="https://via.placeholder.com/150x200.png?text=Ebook+Cover" alt="Ebook Cover" class="ebook-cover">
+                <img src="https://source.unsplash.com/random/?forex,book" alt="Ebook Cover" class="ebook-cover">
                 <h3>The Beginner's Guide to Forex Trading</h3>
                 <p>₦15,000</p>
-                <button class="cta-button">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
-                <img src="https://via.placeholder.com/150x200.png?text=Ebook+Cover" alt="Ebook Cover" class="ebook-cover">
+                <img src="https://source.unsplash.com/random/?forex,strategy" alt="Ebook Cover" class="ebook-cover">
                 <h3>Advanced Forex Strategies</h3>
                 <p>₦25,000</p>
-                <button class="cta-button">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
-                <img src="https://via.placeholder.com/150x200.png?text=Ebook+Cover" alt="Ebook Cover" class="ebook-cover">
+                <img src="https://source.unsplash.com/random/?forex,psychology" alt="Ebook Cover" class="ebook-cover">
                 <h3>The Psychology of Trading</h3>
                 <p>₦20,000</p>
-                <button class="cta-button">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
-                <img src="https://via.placeholder.com/150x200.png?text=Ebook+Cover" alt="Ebook Cover" class="ebook-cover">
+                <img src="https://source.unsplash.com/random/?forex,risk" alt="Ebook Cover" class="ebook-cover">
                 <h3>Risk Management in Forex</h3>
                 <p>₦18,000</p>
-                <button class="cta-button">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
             </div>
         </div>
     </section>
@@ -1009,22 +1049,22 @@
         <h2 class="section-title">Our Experts</h2>
         <div class="experts-grid">
             <div class="expert-card">
-                <img src="https://via.placeholder.com/150x150.png?text=Expert" alt="Expert Photo" class="expert-photo">
+                <img src="https://source.unsplash.com/random/?man,portrait" alt="Expert Photo" class="expert-photo">
                 <h3>John Doe</h3>
                 <p>Chief Market Analyst</p>
             </div>
             <div class="expert-card">
-                <img src="https://via.placeholder.com/150x150.png?text=Expert" alt="Expert Photo" class="expert-photo">
+                <img src="https://source.unsplash.com/random/?woman,portrait" alt="Expert Photo" class="expert-photo">
                 <h3>Jane Smith</h3>
                 <p>Senior Trader</p>
             </div>
             <div class="expert-card">
-                <img src="https://via.placeholder.com/150x150.png?text=Expert" alt="Expert Photo" class="expert-photo">
+                <img src="https://source.unsplash.com/random/?man,professional" alt="Expert Photo" class="expert-photo">
                 <h3>Samuel Green</h3>
                 <p>Risk Management Specialist</p>
             </div>
             <div class="expert-card">
-                <img src="https://via.placeholder.com/150x150.png?text=Expert" alt="Expert Photo" class="expert-photo">
+                <img src="https://source.unsplash.com/random/?woman,professional" alt="Expert Photo" class="expert-photo">
                 <h3>Grace Williams</h3>
                 <p>Training Coordinator</p>
             </div>
@@ -1655,6 +1695,7 @@
         // Hero slider
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
+        let slideInterval = setInterval(nextSlide, 5000);
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -1670,8 +1711,22 @@
             showSlide(currentSlide);
         }
 
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        document.querySelector('.left-arrow').addEventListener('click', () => {
+            prevSlide();
+            clearInterval(slideInterval);
+        });
+
+        document.querySelector('.right-arrow').addEventListener('click', () => {
+            nextSlide();
+            clearInterval(slideInterval);
+        });
+
         showSlide(currentSlide);
-        setInterval(nextSlide, 5000);
 
 
         // Mobile menu
