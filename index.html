@@ -359,6 +359,95 @@
             margin: 0 auto;
         }
 
+        /* Ebook Section */
+        .ebook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ebook-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .ebook-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.1);
+        }
+
+        .ebook-cover {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .ebook-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--heading-color);
+        }
+
+        .ebook-card p {
+            color: var(--text-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Experts Section */
+        .experts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .expert-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .expert-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.1);
+        }
+
+        .expert-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 5px solid var(--primary-color);
+        }
+
+        .expert-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--heading-color);
+        }
+
+        .expert-card p {
+            color: var(--text-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
         .service-card {
             background: #fff;
             padding: 2.5rem;
@@ -784,7 +873,9 @@
         <ul class="nav-links" id="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#ebooks">Ebooks</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="#experts">Our Experts</a></li>
             <li><a href="#training">Training</a></li>
             <li><a href="#payment">Payment</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -798,7 +889,7 @@
     <section id="home" class="hero">
         <div class="hero-slider">
             <div class="slide" style="background-image: url('assets/images/marina.jpg')"></div>
-            <div class="slide" style="background-image: url('assets/images/port_harcourt.jpg')"></div>
+            <div class="slide" style="background-image: url('assets/images/civic_towers.jpg')"></div>
             <div class="slide" style="background-image: url('assets/images/ibadan.jpg')"></div>
             <div class="slide" style="background-image: url('assets/images/vi.jpg')"></div>
             <div class="slide" style="background-image: url('assets/images/abuja.jpg')"></div>
@@ -848,6 +939,36 @@
         </div>
     </section>
 
+    <section id="ebooks">
+        <h2 class="section-title">Our Ebooks</h2>
+        <div class="ebook-grid">
+            <div class="ebook-card">
+                <img src="https://via.placeholder.com/150x200.png?text=Ebook+Cover" alt="Ebook Cover" class="ebook-cover">
+                <h3>The Beginner's Guide to Forex Trading</h3>
+                <p>₦15,000</p>
+                <button class="cta-button">Buy Now</button>
+            </div>
+            <div class="ebook-card">
+                <img src="https://via.placeholder.com/150x200.png?text=Ebook+Cover" alt="Ebook Cover" class="ebook-cover">
+                <h3>Advanced Forex Strategies</h3>
+                <p>₦25,000</p>
+                <button class="cta-button">Buy Now</button>
+            </div>
+            <div class="ebook-card">
+                <img src="https://via.placeholder.com/150x200.png?text=Ebook+Cover" alt="Ebook Cover" class="ebook-cover">
+                <h3>The Psychology of Trading</h3>
+                <p>₦20,000</p>
+                <button class="cta-button">Buy Now</button>
+            </div>
+            <div class="ebook-card">
+                <img src="https://via.placeholder.com/150x200.png?text=Ebook+Cover" alt="Ebook Cover" class="ebook-cover">
+                <h3>Risk Management in Forex</h3>
+                <p>₦18,000</p>
+                <button class="cta-button">Buy Now</button>
+            </div>
+        </div>
+    </section>
+
     <section id="services">
         <h2 class="section-title">What We Do</h2>
         <div class="services-grid">
@@ -880,6 +1001,32 @@
                 <div class="service-icon"><span class="material-icons">groups</span></div>
                 <h3>24/7 Support</h3>
                 <p>Round-the-clock customer support from our team of experienced trading professionals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experts">
+        <h2 class="section-title">Our Experts</h2>
+        <div class="experts-grid">
+            <div class="expert-card">
+                <img src="https://via.placeholder.com/150x150.png?text=Expert" alt="Expert Photo" class="expert-photo">
+                <h3>John Doe</h3>
+                <p>Chief Market Analyst</p>
+            </div>
+            <div class="expert-card">
+                <img src="https://via.placeholder.com/150x150.png?text=Expert" alt="Expert Photo" class="expert-photo">
+                <h3>Jane Smith</h3>
+                <p>Senior Trader</p>
+            </div>
+            <div class="expert-card">
+                <img src="https://via.placeholder.com/150x150.png?text=Expert" alt="Expert Photo" class="expert-photo">
+                <h3>Samuel Green</h3>
+                <p>Risk Management Specialist</p>
+            </div>
+            <div class="expert-card">
+                <img src="https://via.placeholder.com/150x150.png?text=Expert" alt="Expert Photo" class="expert-photo">
+                <h3>Grace Williams</h3>
+                <p>Training Coordinator</p>
             </div>
         </div>
     </section>
