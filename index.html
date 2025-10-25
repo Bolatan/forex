@@ -58,9 +58,16 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary-color);
+        }
+
+        .logo-icon {
+            margin-right: 0.5rem;
+            font-size: 2.5rem;
         }
 
         .nav-links {
@@ -953,7 +960,10 @@
 </head>
 <body>
     <nav>
-        <div class="logo">ForexPro Elite</div>
+        <div class="logo">
+            <span class="material-icons logo-icon">insights</span>
+            ForexPro Elite
+        </div>
         <ul class="nav-links" id="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -1020,25 +1030,25 @@
                 <img src="assets/images/ebook1.jpg" alt="Ebook Cover" class="ebook-cover">
                 <h3>The Beginner's Guide to Forex Trading</h3>
                 <p>₦15,000</p>
-                <button class="cta-button" onclick="window.location.href='cart.html'">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
                 <img src="assets/images/ebook2.jpg" alt="Ebook Cover" class="ebook-cover">
                 <h3>Advanced Forex Strategies</h3>
                 <p>₦25,000</p>
-                <button class="cta-button" onclick="window.location.href='cart.html'">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
                 <img src="assets/images/ebook3.jpg" alt="Ebook Cover" class="ebook-cover">
                 <h3>The Psychology of Trading</h3>
                 <p>₦20,000</p>
-                <button class="cta-button" onclick="window.location.href='cart.html'">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
                 <img src="assets/images/ebook4.jpg" alt="Ebook Cover" class="ebook-cover">
                 <h3>Risk Management in Forex</h3>
                 <p>₦18,000</p>
-                <button class="cta-button" onclick="window.location.href='cart.html'">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
             </div>
         </div>
     </section>
