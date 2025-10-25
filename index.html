@@ -14,11 +14,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #007bff;
-            --secondary-color: #0056b3;
+            --primary-color: #006400; /* darkgreen */
+            --secondary-color: #004d00;
             --background-color: #ffffff;
             --text-color: #333333;
-            --heading-color: #003d80;
+            --heading-color: #006400; /* darkgreen */
             --light-gray: #f8f9fa;
             --border-color: #dee2e6;
         }
@@ -362,7 +362,7 @@
         }
 
         .about-image {
-            background-image: url('https://source.unsplash.com/random/?forex');
+            background-image: url('https://source.unsplash.com/random/?forex,data,analysis');
             background-size: cover;
             background-position: center;
             border-radius: 10px;
@@ -396,6 +396,16 @@
             background-repeat: no-repeat;
             background-size: cover;
             height: 400px;
+            padding: 0;
+        }
+
+        .forex-background-break {
+            background-image: url('https://source.unsplash.com/random/?forex,abstract');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 300px;
             padding: 0;
         }
 
@@ -893,6 +903,31 @@
             margin: 0 auto;
         }
 
+        #back-to-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.3s, transform 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #back-to-top-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.1);
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -971,40 +1006,39 @@
                 <h3>Why Choose Us</h3>
                 <p>As a proudly Nigerian company, we understand the local market dynamics and challenges. Our team of expert traders and educators have helped thousands of Nigerian clients achieve their financial goals through strategic trading, comprehensive training programs, and local payment solutions.</p>
             </div>
-            <div class="about-image">
-            </div>
+            <div class="about-image"></div>
         </div>
     </section>
 
-    <section id="forex-image-section">
+    <section id="forex-image-section" class="forex-background-break">
     </section>
 
     <section id="ebooks">
         <h2 class="section-title">Our Ebooks</h2>
         <div class="ebook-grid">
             <div class="ebook-card">
-                <img src="https://source.unsplash.com/random/?forex,book" alt="Ebook Cover" class="ebook-cover">
+                <img src="https://source.unsplash.com/random/?forex,education" alt="Ebook Cover" class="ebook-cover">
                 <h3>The Beginner's Guide to Forex Trading</h3>
                 <p>₦15,000</p>
-                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
-                <img src="https://source.unsplash.com/random/?forex,strategy" alt="Ebook Cover" class="ebook-cover">
+                <img src="https://source.unsplash.com/random/?forex,charts" alt="Ebook Cover" class="ebook-cover">
                 <h3>Advanced Forex Strategies</h3>
                 <p>₦25,000</p>
-                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
-                <img src="https://source.unsplash.com/random/?forex,psychology" alt="Ebook Cover" class="ebook-cover">
+                <img src="https://source.unsplash.com/random/?forex,mindset" alt="Ebook Cover" class="ebook-cover">
                 <h3>The Psychology of Trading</h3>
                 <p>₦20,000</p>
-                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='cart.html'">Buy Now</button>
             </div>
             <div class="ebook-card">
-                <img src="https://source.unsplash.com/random/?forex,risk" alt="Ebook Cover" class="ebook-cover">
+                <img src="https://source.unsplash.com/random/?forex,safety" alt="Ebook Cover" class="ebook-cover">
                 <h3>Risk Management in Forex</h3>
                 <p>₦18,000</p>
-                <button class="cta-button" onclick="window.location.href='/cart.html'">Buy Now</button>
+                <button class="cta-button" onclick="window.location.href='cart.html'">Buy Now</button>
             </div>
         </div>
     </section>
@@ -1049,22 +1083,22 @@
         <h2 class="section-title">Our Experts</h2>
         <div class="experts-grid">
             <div class="expert-card">
-                <img src="https://source.unsplash.com/random/?man,portrait" alt="Expert Photo" class="expert-photo">
+                <img src="https://source.unsplash.com/random/?man,financial,advisor" alt="Expert Photo" class="expert-photo">
                 <h3>John Doe</h3>
                 <p>Chief Market Analyst</p>
             </div>
             <div class="expert-card">
-                <img src="https://source.unsplash.com/random/?woman,portrait" alt="Expert Photo" class="expert-photo">
+                <img src="https://source.unsplash.com/random/?woman,trader" alt="Expert Photo" class="expert-photo">
                 <h3>Jane Smith</h3>
                 <p>Senior Trader</p>
             </div>
             <div class="expert-card">
-                <img src="https://source.unsplash.com/random/?man,professional" alt="Expert Photo" class="expert-photo">
+                <img src="https://source.unsplash.com/random/?man,risk,management" alt="Expert Photo" class="expert-photo">
                 <h3>Samuel Green</h3>
                 <p>Risk Management Specialist</p>
             </div>
             <div class="expert-card">
-                <img src="https://source.unsplash.com/random/?woman,professional" alt="Expert Photo" class="expert-photo">
+                <img src="https://source.unsplash.com/random/?woman,trainer" alt="Expert Photo" class="expert-photo">
                 <h3>Grace Williams</h3>
                 <p>Training Coordinator</p>
             </div>
@@ -1370,6 +1404,10 @@
     <footer>
         <p>&copy; 2025 ForexPro Elite. All rights reserved. Trading forex involves risk. Past performance does not guarantee future results.</p>
     </footer>
+
+    <button id="back-to-top-btn" title="Go to top">
+        <span class="material-icons">arrow_upward</span>
+    </button>
 
     <script>
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -1754,6 +1792,27 @@
         // Close mobile menu when a link is clicked
         mobileNavLinks.addEventListener('click', () => {
             mobileNavContainer.classList.remove('active');
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top-btn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: {
+                    y: 0
+                },
+                ease: "power3.inOut"
+            });
         });
     </script>
 </body>
